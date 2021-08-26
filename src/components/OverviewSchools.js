@@ -11,7 +11,8 @@ function OverviewSchools(props) {
                     <div key={school.id}>
                         <div>{school.name}</div>
                         <div>{school.degree}</div>
-                        <div>{school.dates}</div>
+                        <div>{school.dateStart}</div>
+                        <div>{school.dateEnd}</div>
                     </div>
                 )}
             </div>

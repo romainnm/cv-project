@@ -11,7 +11,8 @@ function OverviewWorks(props) {
                     <div key={work.id}>
                         <div>{work.name}</div>
                         <div>{work.title}</div>
-                        <div>{work.dates}</div>
+                        <div>{work.dateStart}</div>
+                        <div>{work.dateEnd}</div>
                     </div>
                 )}
             </div>

@@ -17,20 +17,23 @@ class App extends Component {
       infoName: '',
       infoEmail: '',
       infoPhone: '',
+      infoLocation: '',
       infos: [],
       showHideInfos: false, 
       showHideInfosForm: true,
     /* School States */  
       schoolName: '',
       schoolDegree: '',
-      schoolDates: '',
+      schoolDateStart: '',
+      schoolDateEnd: '',
       schools: [],
       showHideSchools: false, 
       showHideSchoolsForm: true,
     /* Work States */  
       workName: '',
       workTitle: '',
-      workDates: '',
+      workDateStart: '',
+      workDateEnd: '',
       works: [],
       showHideWorks: false, 
       showHideWorksForm: true,
@@ -48,6 +51,7 @@ class App extends Component {
         name: this.state.infoName,
         email: this.state.infoEmail,
         phone: this.state.infoPhone,
+        location: this.state.infoLocation,
         id: uniqid(),
       }),
       infoName: '',
@@ -63,12 +67,14 @@ class App extends Component {
       schools: this.state.schools.concat({
         name: this.state.schoolName,
         degree: this.state.schoolDegree,
-        dates: this.state.schoolDates,
+        dateStart: this.state.schoolDateStart,
+        dateEnd: this.state.schoolDateEnd,
         id: uniqid(),
       }),
       schoolName: '',
       schoolDegree: '',
-      schoolDates: '',
+      schoolDateStart: '',
+      schoolDateEnd: '',
       showHideSchools: !this.setState.showHideSchools,
       showHideSchoolsForm: this.setState({showHideSchoolsForm: false}),
     });
@@ -79,12 +85,14 @@ class App extends Component {
       works: this.state.works.concat({
         name: this.state.workName,
         title: this.state.workTitle,
-        dates: this.state.workDates,
+        dateStart: this.state.workDateStart,
+        dateEnd: this.state.workDateEnd,
         id: uniqid(),
       }),
       workName: '',
       workTitle: '',
-      workDate: '',
+      workDateStart: '',
+      workDateEnd: '',
       showHideWorks: !this.setState.showHideWorks,
       showHideWorksForm: this.setState({showHideWorksForm: false}),
     });
@@ -97,29 +105,33 @@ class App extends Component {
       infoName,
       infoEmail,
       infoPhone,
+      infoLocation,
       infos,
       showHideWorksForm,
       showHideWorks,
       workName,
       workTitle,
-      workDates,
+      workDateStart,
+      workDateEnd,
       works,
       showHideSchoolsForm,
       showHideSchools,
       schoolName,
       schoolDegree,
-      schoolDates,
+      schoolDateStart,
+      schoolDateEnd,
       schools,
     } = this.state;
 
-    return <div className="main-content">
+    return <div className="main-container">
       <h1>Quick CV</h1>
 {/* === Personal info section === */}
       {showHideInfosForm && (
         <FormInfos 
           infoName={infoName}
-          infoEmail={infoEmail}
           infoPhone={infoPhone}
+          infoEmail={infoEmail}
+          infoLocation={infoLocation}
           handleChange={this.handleChange}
           handleSubmitInfo={this.handleSubmitInfo}
         />
@@ -132,7 +144,8 @@ class App extends Component {
         <FormWorks 
           workName={workName}
           workTitle={workTitle}
-          workDates={workDates}
+          workDateStart={workDateStart}
+          workDateEnd={workDateEnd}
           handleChange={this.handleChange}
           handleSubmitWork={this.handleSubmitWork}
         />
@@ -145,7 +158,8 @@ class App extends Component {
         <FormSchools 
           schoolName={schoolName}
           schoolDegree={schoolDegree}
-          schoolDates={schoolDates}
+          schoolDateStart={schoolDateStart}
+          schoolDateEnd={schoolDateEnd}
           handleChange={this.handleChange}
           handleSubmitSchool={this.handleSubmitSchool}
         />
