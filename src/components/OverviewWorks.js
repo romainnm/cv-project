@@ -1,23 +1,39 @@
 import React from "react";
 
 function OverviewWorks(props) {
-    const { works } = props;
+  const { works } = props;
 
-    return (
-        <div>
-            <div>
-                <h4>Work Experiences</h4>
-                {works.map(work => 
-                    <div key={work.id}>
-                        <div>{work.name}</div>
-                        <div>{work.title}</div>
-                        <div>{work.dateStart}</div>
-                        <div>{work.dateEnd}</div>
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-};
+  return (
+    <div className="overview">
+      <h2>Work Experiences</h2>
+      {works.map((work) => (
+        <ul key={work.id} className="overview-list">
+          <li>
+            <p>
+              <span className="pink">Company: </span>
+              {work.name}
+            </p>
+          </li>
+          <li>
+            <p>
+              <span className="pink">Title: </span>
+              {work.title}
+            </p>
+          </li>
+          <li>
+            <p>
+              <span className="pink">Date: </span>
+              {work.dateStart}
+            </p>
+            <p>
+              <span className="pink">> </span>
+              {work.dateEnd}
+            </p>
+          </li>
+        </ul>
+      ))}
+    </div>
+  );
+}
 
 export default OverviewWorks;

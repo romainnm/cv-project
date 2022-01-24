@@ -4,46 +4,48 @@ import OverviewSchools from "./components/OverviewSchools";
 import OverviewWorks from "./components/OverviewWorks";
 import FormInfos from "./components/FormInfos";
 import FormWorks from "./components/FormWorks";
-import FormSchools from "./components/FormSchools";  
+import FormSchools from "./components/FormSchools";
 import uniqid from "uniqid";
+import AddValidBtns from "./components/AddValidBtns";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-    /* Personal Info States */
-      infoName: '',
-      infoEmail: '',
-      infoPhone: '',
-      infoLocation: '',
+      /* Personal Info States */
+      infoName: "",
+      infoEmail: "",
+      infoPhone: "",
+      infoLocation: "",
       infos: [],
-      showHideInfos: false, 
+      showHideInfos: false,
       showHideInfosForm: true,
-    /* School States */  
-      schoolName: '',
-      schoolDegree: '',
-      schoolDateStart: '',
-      schoolDateEnd: '',
+      /* School States */
+      schoolName: "",
+      schoolDegree: "",
+      schoolDateStart: "",
+      schoolDateEnd: "",
       schools: [],
-      showHideSchools: false, 
+      showHideSchools: false,
       showHideSchoolsForm: true,
-    /* Work States */  
-      workName: '',
-      workTitle: '',
-      workDateStart: '',
-      workDateEnd: '',
+      /* Work States */
+      workName: "",
+      workTitle: "",
+      workDateStart: "",
+      workDateEnd: "",
       works: [],
-      showHideWorks: false, 
+      showHideWorks: false,
       showHideWorksForm: true,
+      /* Button Container*/
+      showBtnSchool: false,
+      showBtnWork: false,
     };
-    
   }
 
-  handleChange = (e) => { 
-    this.setState({ [e.target.name]: e.target.value});  
-  }
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   handleSubmitInfo = (e) => {
     e.preventDefault();
     this.setState({
@@ -54,13 +56,13 @@ class App extends Component {
         location: this.state.infoLocation,
         id: uniqid(),
       }),
-      infoName: '',
-      infoEmail: '',
-      infoPhone: '',
+      infoName: "",
+      infoEmail: "",
+      infoPhone: "",
       showHideInfos: !this.setState.showHideInfos,
-      showHideInfosForm: this.setState({showHideInfosForm: false}),
+      showHideInfosForm: false,
     });
-  }
+  };
   handleSubmitSchool = (e) => {
     e.preventDefault();
     this.setState({
@@ -71,14 +73,15 @@ class App extends Component {
         dateEnd: this.state.schoolDateEnd,
         id: uniqid(),
       }),
-      schoolName: '',
-      schoolDegree: '',
-      schoolDateStart: '',
-      schoolDateEnd: '',
+      schoolName: "",
+      schoolDegree: "",
+      schoolDateStart: "",
+      schoolDateEnd: "",
       showHideSchools: !this.setState.showHideSchools,
-      showHideSchoolsForm: this.setState({showHideSchoolsForm: false}),
+      showHideSchoolsForm: false,
+      showBtnSchool: true,
     });
-  }
+  };
   handleSubmitWork = (e) => {
     e.preventDefault();
     this.setState({
@@ -89,14 +92,37 @@ class App extends Component {
         dateEnd: this.state.workDateEnd,
         id: uniqid(),
       }),
-      workName: '',
-      workTitle: '',
-      workDateStart: '',
-      workDateEnd: '',
+      workName: "",
+      workTitle: "",
+      workDateStart: "",
+      workDateEnd: "",
       showHideWorks: !this.setState.showHideWorks,
-      showHideWorksForm: this.setState({showHideWorksForm: false}),
+      showHideWorksForm: false,
+      showBtnWork: true,
     });
-  }
+  };
+  addWork = () => {
+    this.setState({
+      showHideWorksForm: true,
+      showBtnWork: false,
+    });
+  };
+  addSchool = () => {
+    this.setState({
+      showHideSchoolsForm: true,
+      showBtnSchool: false,
+    });
+  };
+  validWork = () => {
+    this.setState({
+      showBtnWork: false,
+    });
+  };
+  validSchool = () => {
+    this.setState({
+      showBtnSchool: false,
+    });
+  };
 
   render() {
     const {
@@ -121,54 +147,79 @@ class App extends Component {
       schoolDateStart,
       schoolDateEnd,
       schools,
+      showBtnWork,
+      showBtnSchool,
     } = this.state;
 
-    return <div className="main-container">
-      <h1>Quick CV</h1>
-{/* === Personal info section === */}
-      {showHideInfosForm && (
-        <FormInfos 
-          infoName={infoName}
-          infoPhone={infoPhone}
-          infoEmail={infoEmail}
-          infoLocation={infoLocation}
-          handleChange={this.handleChange}
-          handleSubmitInfo={this.handleSubmitInfo}
-        />
-      )}
-      {showHideInfos && (
-        <OverviewInfos infos={infos} />
-      )}
-{/* === Work section === */}
-      {showHideWorksForm && (
-        <FormWorks 
-          workName={workName}
-          workTitle={workTitle}
-          workDateStart={workDateStart}
-          workDateEnd={workDateEnd}
-          handleChange={this.handleChange}
-          handleSubmitWork={this.handleSubmitWork}
-        />
-      )}
-      {showHideWorks && (
-        <OverviewWorks works={works} />
-      )}
-{/* === School section === */}
-      {showHideSchoolsForm && (
-        <FormSchools 
-          schoolName={schoolName}
-          schoolDegree={schoolDegree}
-          schoolDateStart={schoolDateStart}
-          schoolDateEnd={schoolDateEnd}
-          handleChange={this.handleChange}
-          handleSubmitSchool={this.handleSubmitSchool}
-        />
-      )}
-      {showHideSchools && (
-        <OverviewSchools schools={schools} />
-      )}
-      
-    </div>;
+    return (
+      <main>
+        <h1>
+          Quick<span className="title">CV</span>
+        </h1>
+        {/* === Personal info section === */}
+        <section className="personal-infos">
+          {showHideInfosForm && (
+            <FormInfos
+              infoName={infoName}
+              infoPhone={infoPhone}
+              infoEmail={infoEmail}
+              infoLocation={infoLocation}
+              handleChange={this.handleChange}
+              handleSubmitInfo={this.handleSubmitInfo}
+            />
+          )}
+          {showHideInfos && <OverviewInfos infos={infos} />}
+        </section>
+        {/* === Personal info END === */}
+
+        {/* === Work section === */}
+        <section className="work-infos">
+          {showHideWorksForm && (
+            <FormWorks
+              workName={workName}
+              workTitle={workTitle}
+              workDateStart={workDateStart}
+              workDateEnd={workDateEnd}
+              handleChange={this.handleChange}
+              handleSubmitWork={this.handleSubmitWork}
+            />
+          )}
+          {showHideWorks && <OverviewWorks works={works} />}
+          {showBtnWork && (
+            <AddValidBtns
+              section={"Work"}
+              addExperience={this.addWork}
+              valid={this.validWork}
+            />
+          )}
+        </section>
+
+        {/* === Work END === */}
+
+        {/* === School section === */}
+        <section className="school-infos">
+          {showHideSchoolsForm && (
+            <FormSchools
+              schoolName={schoolName}
+              schoolDegree={schoolDegree}
+              schoolDateStart={schoolDateStart}
+              schoolDateEnd={schoolDateEnd}
+              handleChange={this.handleChange}
+              handleSubmitSchool={this.handleSubmitSchool}
+            />
+          )}
+          {showHideSchools && <OverviewSchools schools={schools} />}
+          {showBtnSchool && (
+            <AddValidBtns
+              section={"School"}
+              addExperience={this.addSchool}
+              valid={this.validSchool}
+            />
+          )}
+        </section>
+        {/* === School END === */}
+      </main>
+    );
   }
 }
 
